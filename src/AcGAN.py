@@ -68,7 +68,9 @@ class Discriminator(nn.Module):
             nn.Dropout(0.3),
             nn.Linear(512, 256)
         )
+        #adversarial component
         self.adv = nn.Linear(256, 1)
+        #auxiliary component
         self.aux = nn.Linear(256, num_classes)
 
     def forward(self, x: torch.Tensor)->tuple:
@@ -92,6 +94,6 @@ if __name__ == "__main__":
     print(gen_out.shape)
     dis_out = D(gen_out)
     print(dis_out[0].shape, dis_out[1].shape)
-    
+
 
 

@@ -1,125 +1,96 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 
+#Generator: G(z, y)
 class Generator(nn.Module):
-    """
-    Generator class
-    """
-    def __init__(self, num_classes=10, latent_dim=100, img_shape=(1, 28, 28)):
+    def __init__(self, noise_dim: int, image_dim: int, num_classes:int)->torch.Tensor:
         """
         Parameters
         ----------
+        noise_dim : int
+            dimension of noise vector
+        image_dim : int
+            dimension of image e.g. 784 for MNIST
         num_classes : int
-            Number of classes in dataset
-        latent_dim : int
-            Dimension of noise vector
-        img_shape : tuple
-            Shape of image
+            number of classes e.g. 10 for MNIST
+
+        Returns
+        -------
+        forward : torch.Tensor
+            return a tensor of image
         """
+
         super(Generator, self).__init__()
-        self.num_classes = num_classes
-        self.latent_dim = latent_dim
-        self.img_shape = img_shape
-
-        self.label_emb = nn.Embedding(num_classes, num_classes)
-
-        self.model = nn.Sequential(
-            nn.Linear(self.latent_dim + self.num_classes, 128),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(128, 256),
-            nn.BatchNorm1d(256, 0.8),
-            nn.LeakyReLU(0.2, inplace=True),
+        self.embed = nn.Embedding(num_classes, num_classes)
+        self.seq = nn.Sequential(
+            nn.Linear(noise_dim+num_classes, 256),
+            nn.LeakyReLU(0.2),
             nn.Linear(256, 512),
-            nn.BatchNorm1d(512, 0.8),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, int(torch.prod(torch.tensor(self.img_shape)))),
+            nn.LeakyReLU(0.2),
+            nn.Linear(512, 1024),
+            nn.LeakyReLU(0.2),
+            nn.Linear(1024, image_dim),
             nn.Tanh()
         )
 
-    def forward(self, noise, labels):
+    def forward(self, x: torch.Tensor, y: torch.Tensor)->torch.Tensor:
         """
-        Forward pass
+        x: noise vector
+        y: label
+        """
+        y = self.embed(y)
+        x = torch.cat([x, y], dim=1)
+        return self.seq(x)
+    
+#Discriminator: D(x, y)
+class Discriminator(nn.Module):
+    def __init__(self, image_dim: int, num_classes:int)->torch.Tensor:
+        """
         Parameters
         ----------
-        noise : torch.Tensor
-            Noise vector
-        labels : torch.Tensor
-            Labels of images
+        image_dim : int
+            dimension of image e.g. 784 for MNIST
+        num_classes : int
+            number of classes e.g. 10 for MNIST
 
         Returns
         -------
-        torch.Tensor
-            Generated images
-        """
-        gen_input = torch.cat((self.label_emb(labels), noise), -1)
-        img = self.model(gen_input)
-        img = img.view(img.size(0), *self.img_shape)
-        return img
-    
-class Discriminator(nn.Module):
-    """
-    Discriminator class
-    """
-    def __init__(self, num_classes=10, img_shape=(1, 28, 28)):
-        """
-        Parameters
-        ----------
-        num_classes : int
-            Number of classes in dataset
-        img_shape : tuple
-            Shape of image
+        forward : torch.Tensor
+            return a tensor of image, shape (batch_size, 1)
         """
         super(Discriminator, self).__init__()
-        self.num_classes = num_classes
-        self.img_shape = img_shape
-
-        self.label_embedding = nn.Embedding(num_classes, num_classes)
-
-        self.model = nn.Sequential(
-            nn.Linear(self.num_classes + int(torch.prod(torch.tensor(self.img_shape))), 512),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 512),
-            nn.Dropout(0.4),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 512),
-            nn.Dropout(0.4),
-            nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(512, 1)
+        self.embed = nn.Embedding(num_classes, num_classes)
+        self.seq = nn.Sequential(
+            nn.Linear(image_dim+num_classes, 512),
+            nn.LeakyReLU(0.2),
+            nn.Linear(512, 256),
+            nn.LeakyReLU(0.2),
+            nn.Linear(256, 1),
+            nn.Sigmoid()
         )
 
-    def forward(self, img, labels):
+    def forward(self, x: torch.Tensor, y: torch.Tensor)->torch.Tensor:
         """
-        Forward pass
-        Parameters
-        ----------
-        img : torch.Tensor
-            Images
-        labels : torch.Tensor
-            Labels of images
-
-        Returns
-        -------
-        torch.Tensor
-            Probability of real image
+        x: image
+        y: label
         """
-        img = img.view(img.size(0), -1)
-        d_in = torch.cat((img, self.label_embedding(labels)), -1)
-        return self.model(d_in)
-
+        y = self.embed(y)
+        x = torch.cat([x, y], dim=1)
+        return self.seq(x)
+    
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    gen = Generator().to(device)
+    noise_dim = 100
+    image_dim = 784
     num_classes = 10
-    latent_dim = 100
-    img_shape = (1, 28, 28)
-    batch_size = 32
-    noise = torch.randn(batch_size, latent_dim, device=device)
-    labels = torch.randint(0, num_classes, (batch_size,), device=device)
-    gen_imgs = gen(noise, labels)
-    print(gen_imgs.shape)
-    disc = Discriminator().to(device)
-    validity = disc(gen_imgs, labels)
-    print(validity.shape)
-
+    batch_size = 128
+    noise = torch.randn(batch_size, noise_dim).to(device)
+    labels = torch.randint(0, num_classes, (batch_size,)).to(device)
+    G = Generator(noise_dim, image_dim, num_classes).to(device)
+    D = Discriminator(image_dim, num_classes).to(device)
+    gen_out = G(noise, labels)
+    dis_out = D(gen_out, labels)
+    print(gen_out.shape)
+    print(dis_out.shape)
+    

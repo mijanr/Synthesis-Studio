@@ -1,9 +1,22 @@
-# Generative Adversarial Networks (GANs)
-This repository contains the implementation of various GANs techniques. 
+# Generative Models
+This repository contains the implementation of various generative models, e.g., GANs, VAEs, Transformers, Diffusion Models, etc.
 
+## GANs
+GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGAN, LS-GAN etc. 
  `src` folder contains the implementation of the GANs, and `notebooks` folder contains the notebooks used to train and test the models.
 
- Most of the models will be trained on the MNIST, Fashion-MNIST, and CIFAR-10 datasets. To train the models on the other datasets, you can use the same code with minor changes with the shapes. 
+## AE_VAEs
+AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.
+    `src` folder contains the implementation of the models, and `notebooks` folder contains the notebooks used to train and test the models.
 
- 
+## Transformers
+
+## Diffusion Models
+
+## References
+
+## Requirements
+
+
+
 

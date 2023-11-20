@@ -65,3 +65,25 @@ class Decoder(nn.Module):
     def forward(self, x):
         return self.linear(x)
     
+# VAE class
+class VAE(nn.Module):
+    def __init__(self, input_dim, hidden_dim, latent_dim):
+        super().__init__()
+        """
+        Parameters
+        ----------
+        input_dim : int
+            Dimension of input data, e.g. number of features (28*28=784 for MNIST)
+        hidden_dim : int
+            Dimension of hidden layer
+        latent_dim : int
+            Dimension of latent space (z)
+        """
+        self.encoder = Encoder(input_dim, hidden_dim, latent_dim)
+        self.decoder = Decoder(latent_dim, hidden_dim, input_dim)
+
+    def forward(self, x):
+        mu, log_var = self.encoder(x)
+        z = self.reparameterize(mu, log_var)
+        output = self.decoder(z)
+        return output, mu, log_var

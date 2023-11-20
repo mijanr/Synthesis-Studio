@@ -53,3 +53,27 @@ class Decoder(nn.Module):
         """
         return self.seq(x)
     
+class AE(nn.Module):
+    def __init__(self, image_dim:int, latent_dim:int)->torch.Tensor:
+        super(AE, self).__init__()
+        """
+        Autoencoder: AE(x)
+        Parameters:
+            image_dim: dimension of image, e.g. 28*28=784
+            latent_dim: dimension of latent vector z, e.g. 20
+        Return:
+            returns a tuple of two tensors:
+                - first tensor: reconstructed image
+                - second tensor: encoded image
+        """
+        self.encoder = Encoder(image_dim, latent_dim)
+        self.decoder = Decoder(image_dim, latent_dim)
+
+    def forward(self, x:torch.Tensor)->torch.Tensor:
+        """
+        x: image tensor
+        """
+        encoded_img = self.encoder(x)
+        reconstructed_img = self.decoder(encoded_img)
+        return reconstructed_img, encoded_img
+    

@@ -66,6 +66,9 @@ class AE(nn.Module):
                 - first tensor: reconstructed image
                 - second tensor: encoded image
         """
+        self.image_dim = image_dim
+        self.latent_dim = latent_dim
+
         self.encoder = Encoder(image_dim, latent_dim)
         self.decoder = Decoder(image_dim, latent_dim)
 
@@ -75,5 +78,7 @@ class AE(nn.Module):
         """
         encoded_img = self.encoder(x)
         reconstructed_img = self.decoder(encoded_img)
+        assert encoded_img.shape[-1] == self.latent_dim
+        assert reconstructed_img.shape == x.shape
         return reconstructed_img, encoded_img
     

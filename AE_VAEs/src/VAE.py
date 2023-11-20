@@ -124,3 +124,16 @@ class VAE(nn.Module):
         # Total loss
         total_loss = recon_loss + kl_loss
         return total_loss
+    
+    def sample(self, num_samples):
+        """
+        Parameters
+        ----------
+        num_samples : int
+            Number of samples to generate
+        """
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        z = torch.randn(num_samples, self.encoder.linear2.out_features)
+        samples = self.decoder(z.to(device))
+        return samples
+    

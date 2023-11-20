@@ -27,3 +27,29 @@ class Encoder(nn.Module):
         """
         return self.seq(x)
     
+class Decoder(nn.Module):
+    def __init__(self, image_dim:int, latent_dim:int)->torch.Tensor:
+        super(Decoder, self).__init__()
+        """
+        Decoder: D(z)
+        Parameters:
+            image_dim: dimension of image, e.g. 28*28=784
+            latent_dim: dimension of latent vector z, e.g. 20
+        Return:
+            returns a tensor of image
+        """
+        self.seq = nn.Sequential(
+            nn.Linear(latent_dim, 256),
+            nn.ReLU(),
+            nn.Linear(256, 512),
+            nn.ReLU(),
+            nn.Linear(512, image_dim),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x:torch.Tensor)->torch.Tensor:
+        """
+        x: latent vector z
+        """
+        return self.seq(x)
+    

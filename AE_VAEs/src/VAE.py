@@ -86,6 +86,7 @@ class VAE(nn.Module):
         mu, log_var = self.encoder(x)
         z = self.reparameterize(mu, log_var)
         output = self.decoder(z)
+        return output, mu, log_var
     
     def reparameterize(self, mu, log_var):
         """

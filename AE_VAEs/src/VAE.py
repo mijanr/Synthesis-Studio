@@ -101,3 +101,26 @@ class VAE(nn.Module):
         z = mu + eps*std
         return z
     
+    def loss_function(self, x, output, mu, log_var):
+        """
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input data
+        output : torch.Tensor
+            Output data
+        mu : torch.Tensor
+            Mean of the latent Gaussian distribution
+        log_var : torch.Tensor
+            Log variance of the latent Gaussian distribution
+        """
+        # Reconstruction loss
+        # MSE loss
+        mse_loss = nn.MSELoss(reduction='sum')
+        recon_loss = mse_loss(output, x)
+        
+        # KL divergence loss
+        kl_loss = -0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
+        # Total loss
+        total_loss = recon_loss + kl_loss
+        return total_loss

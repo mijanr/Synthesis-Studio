@@ -137,3 +137,27 @@ class VAE(nn.Module):
         samples = self.decoder(z.to(device))
         return samples
     
+if __name__ == '__main__':
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    # AE parameters
+    input_dim = 784
+    hidden_dim = 400
+    latent_dim = 20
+    ae = VAE(input_dim, hidden_dim, latent_dim).to(device)
+
+    # test forward pass
+    x = torch.randn(64, input_dim).to(device)
+    output, mu, log_var = ae(x)
+    print('output.shape:', output.shape)
+    print('mu.shape:', mu.shape)
+    print('log_var.shape:', log_var.shape)
+
+    # random sample
+    samples = ae.sample(num_samples=64)
+    print('decoder_out.shape:', samples.shape)
+
+    # test loss function
+    loss = ae.loss_function(x, output, mu, log_var)
+    print('loss:', loss.item())
+

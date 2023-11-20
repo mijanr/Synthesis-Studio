@@ -82,3 +82,16 @@ class AE(nn.Module):
         assert reconstructed_img.shape == x.shape
         return reconstructed_img, encoded_img
     
+if __name__ == "__main__":
+    # create an instance of AE
+    image_dim = 784
+    latent_dim = 20
+    model = AE(image_dim, latent_dim)
+
+    # create a random image tensor
+    x = torch.rand(1, 784)
+
+    # forward pass
+    reconstructed_img, encoded_img = model(x)
+    print(reconstructed_img.shape)
+    print(encoded_img.shape)

@@ -35,3 +35,33 @@ class Encoder(nn.Module):
         log_var = self.linear3(hidden)
         return mu, log_var
     
+# Decoder class
+class Decoder(nn.Module):
+    def __init__(self, latent_dim, hidden_dim=128, output_dim=784):
+        super().__init__()
+        """
+        Parameters
+        ----------
+        latent_dim : int
+            Dimension of latent space (z)
+        hidden_dim : int
+            Dimension of hidden layer
+        output_dim : int    
+            Dimension of output data, e.g. number of features (28*28=784 for MNIST)
+        """
+        self.linear = nn.Sequential(
+            nn.Linear(latent_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, 256),
+            nn.ReLU(),
+            nn.Linear(256, 512),
+            nn.ReLU(),
+            nn.Linear(512, 1024),
+            nn.ReLU(),
+            nn.Linear(1024, output_dim),
+            nn.Tanh()
+        )
+    
+    def forward(self, x):
+        return self.linear(x)
+    

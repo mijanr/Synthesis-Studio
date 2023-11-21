@@ -46,3 +46,42 @@ class cEncoder(nn.Module):
         log_var = self.linear3(hidden)
         return mu, log_var
     
+# Decoder class
+class cDecoder(nn.Module):
+    def __init__(self, latent_dim:int, output_dim:int, num_classes:int)->torch.Tensor:
+        super().__init__()
+        """
+        Parameters
+        ----------
+        latent_dim : int
+            Dimension of latent space (z)
+        output_dim : int
+            Dimension of output data, e.g. number of features (28*28=784 for MNIST)
+        num_classes : int
+            Number of classes in dataset, e.g. 10 for MNIST
+        """
+        self.embed = nn.Embedding(num_classes, num_classes)
+        self.linear = nn.Sequential(
+            nn.Linear(latent_dim+num_classes, 256),
+            nn.ReLU(),
+            nn.Linear(256, 512),
+            nn.ReLU(),
+            nn.Linear(512, 1024),
+            nn.ReLU(),
+            nn.Linear(1024, output_dim),
+            nn.Tanh()
+        )
+
+    def forward(self, z:torch.Tensor, y:torch.Tensor)->torch.Tensor:
+        """
+        Parameters
+        ----------
+        z : torch.Tensor
+            Latent space
+        y : torch.Tensor
+            Labels
+        """
+        y = self.embed(y)
+        z = torch.cat((z, y), dim=1)
+        return self.linear(z)
+

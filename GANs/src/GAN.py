@@ -1,8 +1,4 @@
 """
-GAN.py
-====================================
-GAN.py is a file that contains the GAN class.
-
 Author:
     Md Mijanur Rahman
 """

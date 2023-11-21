@@ -15,8 +15,8 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
         """
         args:
-            noise_dim: dimension of noise vector
-            image_dim: dimension of image
+            noise_dim: dimension of noise vector, z, e.g. 100
+            image_dim: dimension of image, x, e.g. 28*28 = 784 for MNIST
         return:
             return a tensor of image     
         """
@@ -42,7 +42,7 @@ class Discriminator(nn.Module):
         super(Discriminator, self).__init__()
         """
         args:
-            image_dim: dimension of image
+            image_dim: dimension of image, x, e.g. 28*28 = 784 for MNIST
         return:
             return a tensor of image     
         """
@@ -60,9 +60,12 @@ class Discriminator(nn.Module):
 
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # Hyperparameters
+
+    # parameters
     image_dim = 28 * 28 * 1
     noise_dim = 100
+
+    # check the generator and discriminator
     generator = Generator(noise_dim, image_dim).to(device)
     discriminator = Discriminator(image_dim).to(device)
     noise = torch.randn(64, noise_dim).to(device)

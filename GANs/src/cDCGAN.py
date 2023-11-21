@@ -31,3 +31,38 @@ class cGenerator(nn.Module):
         x = x.view(-1, 128, 7, 7)
         x = self.conv(x)
         return x
+
+# conditional discriminator
+class cDiscriminator(nn.Module):
+    def __init__(self, n_classes:int):
+        super(cDiscriminator, self).__init__()
+        self.n_classes = n_classes
+        self.embed = nn.Embedding(n_classes, n_classes)
+        self.conv = nn.Sequential(
+            nn.Conv2d(1, 32, 3, 1, 1),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Conv2d(32, 64, 4, 2, 1),
+            nn.BatchNorm2d(64),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Conv2d(64, 128, 4, 2, 1),
+            nn.BatchNorm2d(128),
+            nn.LeakyReLU(0.2, inplace=True)
+        )
+        self.linear = nn.Sequential(
+            nn.Flatten(),
+            nn.LazyLinear(out_features= 128),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(128, 1),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x, labels):
+        x = x.view(-1, 28, 28)
+        labels = self.embed(labels)
+        labels = labels.unsqueeze(2).repeat(1, 1, 28)
+        x = torch.cat([x, labels], dim=1)
+        x = x.unsqueeze(1)
+        x = self.conv(x)
+        x = self.linear(x)
+        return x    
+

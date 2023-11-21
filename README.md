@@ -14,6 +14,23 @@ AE_VAEs folder contains the implementation of various Autoencoders and Variation
 ## Diffusion Models
 
 ## References
+- `Understanding AE&VAE: `
+    - https://www.jeremyjordan.me/variational-autoencoders/
+    - https://www.jeremyjordan.me/autoencoders/
+    - https://www.simplilearn.com/tutorials/deep-learning-tutorial/what-are-autoencoders-in-deep-learning
+- `Understanding GANs: `
+    - https://developers.google.com/machine-learning/gan/gan_structure
+    - https://neptune.ai/blog/6-gan-architectures
+- `Understanding Transformers: ` 
+    - https://cgarbin.github.io/understanding-transformers-in-one-morning/
+    - https://e2eml.school/transformers.html
+- `Understanding Diffusion Models: `
+    - https://encord.com/blog/diffusion-models/#:~:text=Diffusion%20models%20are%20a%20class%20of%20generative%20models%20that%20simulate,a%20sequence%20of%20invertible%20operations
+    - https://lilianweng.github.io/posts/2021-07-11-diffusion-models/
+    - https://www.assemblyai.com/blog/diffusion-models-for-machine-learning-introduction/
+
+
+
 
 ## Requirements
 

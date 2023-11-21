@@ -1,8 +1,4 @@
 """
-cGAN.py
-====================================
-- cGAN.py is a file that contains the PyTorch implementatio of conditional GAN.
-- original paper: https://arxiv.org/pdf/1411.1784.pdf
 - Author:
     Md Mijanur Rahman
 """

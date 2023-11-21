@@ -1,3 +1,10 @@
+"""
+Author: Md Mijanur Rahman
+"""
+import torch
+import torch.nn as nn
+
+
 # conditional generator
 class cGenerator(nn.Module):
     def __init__(self, noise_dim:int, n_classes:int):

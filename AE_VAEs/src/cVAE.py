@@ -196,3 +196,37 @@ class cVAE(nn.Module):
         return samples
 
 
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    input_dim = 784
+    latent_dim = 20
+    num_classes = 10
+    output_dim = 784
+
+    # Test encoder
+    x = torch.randn((64, input_dim)).to(device)
+    y = torch.randint(0, 10, (64,)).to(device)
+    encoder = cEncoder(input_dim, latent_dim, num_classes).to(device)
+    mu, log_var = encoder(x, y)
+    print("mu.shape:", mu.shape)
+
+    # Test decoder
+    decoder = cDecoder(latent_dim, input_dim, num_classes).to(device)
+    z = torch.randn((64, latent_dim)).to(device)
+    output = decoder(z, y)
+    print("output.shape:", output.shape)
+    
+    # Test cVAE
+    cvae = cVAE(input_dim, latent_dim, output_dim, num_classes).to(device)
+    output, mu, log_var = cvae(x, y)
+    print("output.shape:", output.shape)
+    print("mu.shape:", mu.shape)
+    print("log_var.shape:", log_var.shape)
+
+    # Test loss function
+    loss = cvae.loss_function(x, output, mu, log_var)
+    print("loss:", loss.item())
+
+    # Test sample
+    samples = cvae.sample(64, y)
+    print("samples.shape:", samples.shape)

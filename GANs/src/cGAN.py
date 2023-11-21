@@ -75,16 +75,21 @@ class Discriminator(nn.Module):
     
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # parameters
     noise_dim = 100
     image_dim = 784
     num_classes = 10
     batch_size = 128
+
+    # test generator and discriminator
     noise = torch.randn(batch_size, noise_dim).to(device)
     labels = torch.randint(0, num_classes, (batch_size,)).to(device)
     G = Generator(noise_dim, image_dim, num_classes).to(device)
     D = Discriminator(image_dim, num_classes).to(device)
     gen_out = G(noise, labels)
     dis_out = D(gen_out, labels)
+    
     print(gen_out.shape)
     print(dis_out.shape)
     

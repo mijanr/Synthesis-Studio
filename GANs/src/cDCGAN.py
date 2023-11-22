@@ -66,3 +66,22 @@ class cDiscriminator(nn.Module):
         x = self.linear(x)
         return x    
 
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # test generator
+    noise_dim = 100
+    n_classes = 10
+    x = torch.randn(32, noise_dim).to(device)
+    labels = torch.randint(0, n_classes, (32,)).to(device)
+    cgenerator = cGenerator(noise_dim, n_classes).to(device)
+    x_hat = cgenerator(x, labels)
+    print(x_hat.shape)
+
+    # test discriminator
+    n_classes = 10
+    x = torch.randn(32, 1, 28, 28).to(device)
+    labels = torch.randint(0, n_classes, (32,)).to(device)
+    cdiscriminator = cDiscriminator(n_classes).to(device)
+    pred_labels = cdiscriminator(x, labels)
+    print(pred_labels.shape)

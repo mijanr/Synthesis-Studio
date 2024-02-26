@@ -4,13 +4,22 @@ This repository contains the implementation of various generative models, e.g., 
 ## GANs
 GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGAN, LS-GAN etc. 
  `src` folder contains the implementation of the GANs, and `notebooks` folder contains the notebooks used to train and test the models.
+ ### Implementations
+- [Conditional DCGAN (cDCGAN)](/GANs/src/cDCGAN.py) | [Notebook](/GANs/notebooks/cDCGAN.ipynb)
+- [Auxiliary Classifier GAN (ACGAN)](/GANs/src/AcGAN.py)
+- [Conditional GAN (cGAN)](/GANs/src/cGAN.py) | [Notebook](/GANs/notebooks/cGAN.ipynb)
+- [Vanilla GAN](/GANs/src/GAN.py) | [Notebook](/GANs/notebooks/GAN.ipynb)
+- [Least Squares GAN (LS-GAN)](/GANs/src/LS_GAN.py)
+- [VAE-GAN](/GANs/src/VAE_GAN.py) | [Notebook](/GANs/notebooks/VAE_GAN.ipynb)
+
  ### Results
  Here are some of the results of the GANs implemented in this repository:
 
-    - Conditional DCGAN 
-        The title shows the label of the generated image, and the image is the generated image.
-            
-![DCGAN](results/cDCGAN_MNIST.png)
+- **Conditional DCGAN **
+
+    The title shows the label of the generated image, and the image is the generated image.
+
+    ![DCGAN](results/cDCGAN_MNIST.png)
 
 
 
@@ -18,18 +27,29 @@ GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGA
 ## AE_VAEs
 AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.
     `src` folder contains the implementation of the models, and `notebooks` folder contains the notebooks used to train and test the models.
+### Implementations
+- [Autoencoder](/AE_VAEs/src/AE.py) | [Notebook](/AE_VAEs/notebooks/AE.ipynb)
+- [Denoising Autoencoder (DAE)](/AE_VAEs/src/denoising_AE.py) | [Notebook](/AE_VAEs/notebooks/denoising_AE.ipynb)
+- [Variational Autoencoder (VAE)](/AE_VAEs/src/VAE.py) | [Notebook](/AE_VAEs/notebooks/VAE.ipynb)
+- [Conditional Variational Autoencoder (cVAE)](/AE_VAEs/src/cVAE.py)
+ | [Notebook](/AE_VAEs/notebooks/cVAE.ipynb)
+
+
 ### Results
 Here are some of the results of the AE_VAEs implemented in this repository:
 
-    - Autoencoder
-        The image shows the original and the reconstructed digit from the MNIST dataset.
+- **Autoencoder**
 
-![AE](results/AE_MNIST.png)
+    The image shows the original and the reconstructed digit
+    from the MNIST dataset.
 
-    - Conditional VAE
-        The image titile shows the label of the generated image, and the image is the generated image.
+    ![AE](results/AE_MNIST.png)
 
-![VAE](results/cVAE_MNIST.png)
+- **Conditional VAE**
+
+    The image titile shows the label of the generated image, and the image is the generated image.
+
+    ![VAE](results/cVAE_MNIST.png)
 
 ## Transformers
 

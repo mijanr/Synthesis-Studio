@@ -45,6 +45,11 @@ AE_VAEs folder contains the implementation of various Autoencoders and Variation
 ## Requirements
 requirements.yml file contains the list of all the required libraries to run the code in this repository.
 
+To install the required libraries, run the following command:
+```bash
+conda env create -f requirements.yml
+```
+
 
 
 

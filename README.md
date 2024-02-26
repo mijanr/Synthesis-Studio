@@ -43,6 +43,9 @@ AE_VAEs folder contains the implementation of various Autoencoders and Variation
 
 
 ## Requirements
+requirements.yml file contains the list of all the required libraries to run the code in this repository.
+
+
 
 
 

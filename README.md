@@ -21,6 +21,11 @@ AE_VAEs folder contains the implementation of various Autoencoders and Variation
 ### Results
 Here are some of the results of the AE_VAEs implemented in this repository:
 
+    - Autoencoder
+        The image shows the original and the reconstructed digit from the MNIST dataset.
+
+![AE](results/AE_MNIST.png)
+
     - Conditional VAE
         The image titile shows the label of the generated image, and the image is the generated image.
 

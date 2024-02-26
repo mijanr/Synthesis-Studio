@@ -4,6 +4,16 @@ This repository contains the implementation of various generative models, e.g., 
 ## GANs
 GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGAN, LS-GAN etc. 
  `src` folder contains the implementation of the GANs, and `notebooks` folder contains the notebooks used to train and test the models.
+ ### Results
+ Here are some of the results of the GANs implemented in this repository:
+
+    - Conditional DCGAN 
+        The title shows the label of the generated image, and the image is the generated image.
+
+![DCGAN](results/cDCGAN_MNIST.png)
+
+
+
 
 ## AE_VAEs
 AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.

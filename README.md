@@ -18,6 +18,13 @@ GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGA
 ## AE_VAEs
 AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.
     `src` folder contains the implementation of the models, and `notebooks` folder contains the notebooks used to train and test the models.
+### Results
+Here are some of the results of the AE_VAEs implemented in this repository:
+
+    - Conditional VAE
+        The image titile shows the label of the generated image, and the image is the generated image.
+
+![VAE](results/cVAE_MNIST.png)
 
 ## Transformers
 

@@ -14,8 +14,7 @@ GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGA
 
  ### Results
  Here are some of the results of the GANs implemented in this repository:
-
-- **Conditional DCGAN **
+- **Conditional DCGAN**
 
     The title shows the label of the generated image, and the image is the generated image.
 

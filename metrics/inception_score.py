@@ -1,3 +1,7 @@
+"""
+ref: https://machinelearningmastery.com/how-to-implement-the-inception-score-from-scratch-for-evaluating-generated-images/
+"""
+
 import numpy as np
 
 def inception_score(preds, n_split=10, eps=1E-16):

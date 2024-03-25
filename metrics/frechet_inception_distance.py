@@ -1,3 +1,6 @@
+'''
+ref: https://machinelearningmastery.com/how-to-implement-the-frechet-inception-distance-fid-from-scratch/
+'''
 import numpy as np
 from scipy.linalg import sqrtm
 

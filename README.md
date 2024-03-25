@@ -5,12 +5,12 @@ This repository contains the implementation of various generative models, e.g., 
 GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGAN, LS-GAN etc. 
  `src` folder contains the implementation of the GANs, and `notebooks` folder contains the notebooks used to train and test the models.
  ### Implementations
-- [Conditional DCGAN (cDCGAN)](/GANs/src/cDCGAN.py) | [Notebook](/GANs/notebooks/cDCGAN.ipynb)
-- [Auxiliary Classifier GAN (ACGAN)](/GANs/src/AcGAN.py)
-- [Conditional GAN (cGAN)](/GANs/src/cGAN.py) | [Notebook](/GANs/notebooks/cGAN.ipynb)
-- [Vanilla GAN](/GANs/src/GAN.py) | [Notebook](/GANs/notebooks/GAN.ipynb)
-- [Least Squares GAN (LS-GAN)](/GANs/src/LS_GAN.py)
-- [VAE-GAN](/GANs/src/VAE_GAN.py) | [Notebook](/GANs/notebooks/VAE_GAN.ipynb)
+- [Conditional DCGAN (cDCGAN)](models/GANs/src/cDCGAN.py) | [Notebook](models/GANs/notebooks/cDCGAN.ipynb)
+- [Auxiliary Classifier GAN (ACGAN)](models/GANs/src/AcGAN.py)
+- [Conditional GAN (cGAN)](models/GANs/src/cGAN.py) | [Notebook](models/GANs/notebooks/cGAN.ipynb)
+- [Vanilla GAN](models/GANs/src/GAN.py) | [Notebook](models/GANs/notebooks/GAN.ipynb)
+- [Least Squares GAN (LS-GAN)](models/GANs/src/LS_GAN.py)
+- [VAE-GAN](models/GANs/src/VAE_GAN.py) | [Notebook](models/GANs/notebooks/VAE_GAN.ipynb)
 
  ### Results
  Here are some of the results of the GANs implemented in this repository:
@@ -27,11 +27,11 @@ GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGA
 AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.
     `src` folder contains the implementation of the models, and `notebooks` folder contains the notebooks used to train and test the models.
 ### Implementations
-- [Autoencoder](/AE_VAEs/src/AE.py) | [Notebook](/AE_VAEs/notebooks/AE.ipynb)
-- [Denoising Autoencoder (DAE)](/AE_VAEs/src/denoising_AE.py) | [Notebook](/AE_VAEs/notebooks/denoising_AE.ipynb)
-- [Variational Autoencoder (VAE)](/AE_VAEs/src/VAE.py) | [Notebook](/AE_VAEs/notebooks/VAE.ipynb)
-- [Conditional Variational Autoencoder (cVAE)](/AE_VAEs/src/cVAE.py)
- | [Notebook](/AE_VAEs/notebooks/cVAE.ipynb)
+- [Autoencoder](models/AE_VAEs/src/AE.py) | [Notebook](models/AE_VAEs/notebooks/AE.ipynb)
+- [Denoising Autoencoder (DAE)](models/AE_VAEs/src/denoising_AE.py) | [Notebook](models/AE_VAEs/notebooks/denoising_AE.ipynb)
+- [Variational Autoencoder (VAE)](models/AE_VAEs/src/VAE.py) | [Notebook](models/AE_VAEs/notebooks/VAE.ipynb)
+- [Conditional Variational Autoencoder (cVAE)](models/AE_VAEs/src/cVAE.py)
+ | [Notebook](models/AE_VAEs/notebooks/cVAE.ipynb)
 
 
 ### Results

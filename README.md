@@ -2,8 +2,9 @@
 This repository contains the implementation of various generative models, e.g., GANs, VAEs, Transformers, Diffusion Models, etc.
 
 ## GANs
-GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGAN, LS-GAN etc. 
+GANs folder contains the implementation of various GANs, e.g., `DCGAN`, `cGAN`, `AcGAN`, `LS-GAN` etc. 
  `src` folder contains the implementation of the GANs, and `notebooks` folder contains the notebooks used to train and test the models.
+ 
  ### Implementations
 - [Conditional DCGAN (cDCGAN)](models/GANs/src/cDCGAN.py) | [Notebook](models/GANs/notebooks/cDCGAN.ipynb)
 - [Auxiliary Classifier GAN (ACGAN)](models/GANs/src/AcGAN.py)
@@ -18,14 +19,15 @@ GANs folder contains the implementation of various GANs, e.g., DCGAN, cGAN, AcGA
 
     The title shows the label of the generated image, and the image is the generated image.
 
-    ![DCGAN](results/cDCGAN_MNIST.png)
+    <img src="results/cDCGAN_MNIST.png" width="250" height="250" alt="cDCGAN">
 
 
 
 
 ## AE_VAEs
-AE_VAEs folder contains the implementation of various Autoencoders and Variational Autoencoders.
+`AE_VAEs` folder contains the implementation of various `Autoencoders` and `Variational Autoencoders`.
     `src` folder contains the implementation of the models, and `notebooks` folder contains the notebooks used to train and test the models.
+
 ### Implementations
 - [Autoencoder](models/AE_VAEs/src/AE.py) | [Notebook](models/AE_VAEs/notebooks/AE.ipynb)
 - [Denoising Autoencoder (DAE)](models/AE_VAEs/src/denoising_AE.py) | [Notebook](models/AE_VAEs/notebooks/denoising_AE.ipynb)
@@ -35,20 +37,21 @@ AE_VAEs folder contains the implementation of various Autoencoders and Variation
 
 
 ### Results
-Here are some of the results of the AE_VAEs implemented in this repository:
+Here are some of the results of the `AE_VAEs` implemented in this repository:
 
 - **Autoencoder**
 
     The image shows the original and the reconstructed digit
     from the MNIST dataset.
 
-    ![AE](results/AE_MNIST.png)
+    <img src="results/AE_MNIST.png" width="250" height="250" alt="AE">
+
 
 - **Conditional VAE**
 
     The image titile shows the label of the generated image, and the image is the generated image.
 
-    ![VAE](results/cVAE_MNIST.png)
+    <img src="results/cVAE_MNIST.png" width="250" height="250" alt="cVAE">
 
 ## References
 - `Understanding AE&VAE: `

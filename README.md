@@ -50,10 +50,6 @@ Here are some of the results of the AE_VAEs implemented in this repository:
 
     ![VAE](results/cVAE_MNIST.png)
 
-## Transformers
-
-## Diffusion Models
-
 ## References
 - `Understanding AE&VAE: `
     - https://www.jeremyjordan.me/variational-autoencoders/

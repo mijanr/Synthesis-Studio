@@ -1,5 +1,5 @@
 # Generative Models
-This repository contains the implementation of various generative models, e.g., GANs, VAEs, Transformers, Diffusion Models, etc.
+This repository contains the implementation of various generative models, e.g., GANs, VAEs, etc. 
 
 ## GANs
 GANs folder contains the implementation of various GANs, e.g., `DCGAN`, `cGAN`, `AcGAN`, `LS-GAN` etc. 

@@ -1,4 +1,5 @@
-# Generative Models
+# Synthesis-Studio: GANs, AEs, and VAEs for generating synthetic images 
+
 This repository contains the implementation of various generative models, e.g., GANs, VAEs, etc. 
 
 ## GANs
